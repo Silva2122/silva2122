@@ -6,7 +6,9 @@ from load_all import bot, dp, db
 
 from keyboards import ListOfButtons
 
+
 class DBCommands:
+
     pool: Connection = db
     ADD_NEW_USER_REFERRAL = "INSERT INTO users(chat_id, username, full_name, referral) " \
                             "VALUES ($1, $2, $3, $4) RETURNING id"
@@ -326,7 +328,7 @@ async def add_money(message: types.Message):
 async def keyboards(message: types.Message):
     text = "Добро пожаловать в мир криптовалюты!"
     keyboard = ListOfButtons(
-           text=["Заработать 10%%", "Заработать 25%", "Курс обмена", "Реклама", "Партнерская программа", "О Нас"],
+           text=["Заработать 10%", "Заработать 25%", "Курс обмена", "Реклама", "Партнерская программа", "О Нас"],
            align=[2, 2, 1, 1]
     ).reply_keyboard
     await message.answer(text=text, reply_markup=keyboard)
