@@ -1,11 +1,10 @@
 import random
-
 from aiogram import types
 from asyncpg import Connection, Record
 from asyncpg.exceptions import UniqueViolationError
-
 from load_all import bot, dp, db
 
+from keyboards import ListOfButtons
 
 class DBCommands:
     pool: Connection = db
@@ -113,7 +112,11 @@ async def register_user(message: types.Message):
 
 
 @dp.message_handler(lambda message: "Курс обмена" == message.text)
-async def btnl (message: types.Message):
+async def btnl(message: types.Message):
+    keyboard_markup = types.InlineKeyboardMarkup(row_width=3)
+    keyboard_markup.add(
+        types.InlineKeyboardButton('Наш Сайт', url='http://cryptochange.tilda.ws'),
+    )
     text = f""
     text += f"""
 <b>Курс обмена</b>
@@ -137,14 +140,17 @@ TRON	                  $0,01	      -8,13%
 
 Чтобы выгодно и надёжно совершить обмен валюты, Вам необходимо перейти на Наш сайт, на котором будет предоставлена вся 
 необходимая информация.
-
-Ссылка на Наш сайт: http://cryptochange.tilda.ws
 """
-    await message.answer(text)
+    await message.answer(text, reply_markup=keyboard_markup)
 
 
 @dp.message_handler(lambda message: "О Нас" == message.text)
 async def btnl (message: types.Message):
+
+    keyboard_markup = types.InlineKeyboardMarkup(row_width=3)
+    keyboard_markup.add(
+        types.InlineKeyboardButton('Наш Сайт', url='http://cryptochange.tilda.ws'),
+    )
     text = f""
     text += f"""
    <b> О Нас </b>
@@ -162,12 +168,11 @@ async def btnl (message: types.Message):
 
 <b>Став частью Нас, Вы можете быть уверены в стабильности Вашего дохода.</b>
 
-Наш сайт: http://cryptochange.tilda.ws
-
 Администрация:
+@CryptoChangeAdmin
 @CryptoChangeSupport
 """
-    await message.answer(text)
+    await message.answer(text,reply_markup=keyboard_markup)
 
 
 @dp.message_handler(lambda message:"Реклама" == message.text)
@@ -199,13 +204,19 @@ async def btnl (message: types.Message):
 
 <b>Рекламу можно разместить по системе бартера, т.е вы публикуетесь у нас, а мы - на Вашем канале, если посчитаем, что активность и аудитория для нас покажутся интересными.</b>
 
-По вопросам рекламы и сотрудничеству обращайтесь : @CryptoChangeSupport
+По вопросам рекламы и сотрудничеству обращайтесь : 
+@CryptoChangeAdmin 
 """
     await message.answer(text)
 
 
 @dp.message_handler(lambda message: "Заработать 25%" == message.text)
 async def btnl ( message:types.Message):
+
+    keyboard_markup = types.InlineKeyboardMarkup(row_width=3)
+    keyboard_markup.add(
+        types.InlineKeyboardButton('Оплата через QIWI', url='https://qiwi.com/payment/form/99?currency=RUB&extra[%27account%27]=+79516657576&extra[%27comment%27]='),
+    )
     text = f""
     uid = types.User.get_current().id
     text += f"""
@@ -227,12 +238,16 @@ async def btnl ( message:types.Message):
 
 При возникновении вопросов немедленно обращайтесь в службу поддержки.
     """
-    await bot.send_message(uid, text)
+    await bot.send_message(uid, text, reply_markup=keyboard_markup)
 
 
 @dp.message_handler(lambda message: "Заработать 10%" == message.text)
-async def btnl (message: types.Message):
+async def btnl (message:types.Message):
 
+    keyboard_markup = types.InlineKeyboardMarkup(row_width=3)
+    keyboard_markup.add(
+        types.InlineKeyboardButton('Оплата через QIWI', url='https://qiwi.com/payment/form/99?currency=RUB&extra[%27account%27]=+77056975701&extra[%27comment%27]='),
+    )
     text = f""
     uid = types.User.get_current().id
     text += f"""
@@ -254,11 +269,12 @@ async def btnl (message: types.Message):
 
 При возникновении вопросов немедленно обращайтесь в службу поддержки.
     """
-    await bot.send_message(uid, text)
+
+    await bot.send_message(uid, text, reply_markup=keyboard_markup)
 
 
 @dp.message_handler(lambda message: "Партнерская программа" == message.text)
-async def btnl (message: types.Message):
+async def btnl(message: types.Message):
 
     text = ""
     text += f"""Партнерская программа
@@ -304,4 +320,14 @@ async def add_money(message: types.Message):
 Теперь ваш баланс: {balance}
     """
     await message.answer(text)
+
+
+@dp.message_handler()
+async def keyboards(message: types.Message):
+    text = "Добро пожаловать в мир криптовалюты!"
+    keyboard = ListOfButtons(
+           text=["Заработать 10%%", "Заработать 25%", "Курс обмена", "Реклама", "Партнерская программа", "О Нас"],
+           align=[2, 2, 1, 1]
+    ).reply_keyboard
+    await message.answer(text=text, reply_markup=keyboard)
 
