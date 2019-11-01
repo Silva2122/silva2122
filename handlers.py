@@ -82,7 +82,7 @@ async def register_user(message: types.Message):
         text=["Заработать 10%", "Заработать 25%", "Курс обмена", "Реклама", "Партнерская программа", "О Нас"],
         align=[2, 2, 1, 1]
     ).reply_keyboard
-    text = ""
+    text = "Всем доброго дня!"
     if not id:
         id = await db.get_id()
     else:
