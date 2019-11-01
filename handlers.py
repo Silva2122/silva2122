@@ -78,7 +78,10 @@ async def register_user(message: types.Message):
     referral = message.get_args()
     id = await db.add_new_user(referral=referral)
     count_users = await db.count_users()
-
+    keyboard = ListOfButtons(
+        text=["Заработать 10%", "Заработать 25%", "Курс обмена", "Реклама", "Партнерская программа", "О Нас"],
+        align=[2, 2, 1, 1]
+    ).reply_keyboard
     text = ""
     if not id:
         id = await db.get_id()
@@ -110,7 +113,7 @@ async def register_user(message: types.Message):
 
 """
 
-    await bot.send_message(chat_id, text)
+    await bot.send_message(chat_id, text, reply_markup=keyboard)
 
 
 @dp.message_handler(lambda message: "Курс обмена" == message.text)
@@ -128,14 +131,13 @@ async def btnl(message: types.Message):
 
                               <b>Цена</b>      <b>Изм(24ч.)</b>
 
-Bitcoin	          $7 544,71	     -8,68%				
-Ethereum	        $160,56	      -7,73%				
-XRP	                     $0,28	      -6,72%							
-Litecoin	            $49,43	      -9,60%				
-EOS	                     $2,76	      -5,80%								
-Stellar	                 $0,06	      -7,34%				
-TRON	                  $0,01	      -8,13%				
-
+Bitcoin           $9250,58       +0,72%    
+Ethereum         $183,21        +0,09%    
+XRP                      $0,29        -0,58%       
+Litecoin              $58,71        +1,21%    
+EOS                      $3,2          -0,6%        
+Stellar                  $0,065      -1,04%    
+TRON                   $0,02        +0,42%				
 
 
 <b>Внимание , курс обмена обновляется ежедневно в 12:00 по Мск, следите за новостями!</b>
