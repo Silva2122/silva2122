@@ -214,7 +214,7 @@ async def btnl (message: types.Message):
     await message.answer(text)
 
 
-@dp.message_handler(lambda message: "Заработать 25%" == message.text)
+@dp.message_handler(lambda message: "Инвестировать на 5 дней" == message.text)
 async def btnl ( message:types.Message):
 
     keyboard_markup = types.InlineKeyboardMarkup(row_width=3)
@@ -233,7 +233,7 @@ async def btnl ( message:types.Message):
 Деньги будут выплачены автоматически по истечению 120 часов с момента пополнения. Вам вернётся депозит и 25% ввиде заработка на кошелёк.</b>
 
 <b>ВНИМАНИЕ❗️</b>
-<b>Минимальная сумма пополнения - 100₽.</b>
+<b>Минимальная сумма пополнения - 50₽.</b>
 
 <b>Инвестировать вы можете, осуществив перевод на наш QIWI кошелёк, указав в комментарии свой уникальный код для 
 идентификации вашей транзакции:</b>  {uid} 
@@ -245,7 +245,7 @@ async def btnl ( message:types.Message):
     await bot.send_message(uid, text, reply_markup=keyboard_markup)
 
 
-@dp.message_handler(lambda message: "Заработать 10%" == message.text)
+@dp.message_handler(lambda message: "Инвестировать на 3 дня" == message.text)
 async def btnl (message:types.Message):
 
     keyboard_markup = types.InlineKeyboardMarkup(row_width=3)
@@ -261,10 +261,10 @@ async def btnl (message:types.Message):
 
 <b>После успешного инвестирования, вся информация о транзакции будет предоставлена в канале @cryptochangemoney 
 
-Деньги будут выплачены автоматически по истечению 120 часов с момента пополнения. Вам вернётся депозит и 10% ввиде заработка на кошелёк.</b>
+Деньги будут выплачены автоматически по истечению 72 часов с момента пополнения. Вам вернётся депозит и 10% ввиде заработка на кошелёк.</b>
 
 <b>ВНИМАНИЕ❗️</b>
-<b>Минимальная сумма пополнения - 100₽.</b>
+<b>Минимальная сумма пополнения - 50₽.</b>
 
 <b>Инвестировать вы можете, осуществив перевод на наш QIWI кошелёк, указав в комментарии свой уникальный код для 
 идентификации вашей транзакции:</b>  {uid} 
