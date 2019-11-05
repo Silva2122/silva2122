@@ -79,7 +79,7 @@ async def register_user(message: types.Message):
     id = await db.add_new_user(referral=referral)
     count_users = await db.count_users()
     keyboard = ListOfButtons(
-        text=["Заработать 10%", "Заработать 25%", "Курс обмена", "Реклама", "Партнерская программа", "О Нас"],
+        text=["Инвестировать на 3 дня", "Инвестировать на 5 дней", "Курс обмена", "Реклама", "Партнерская программа", "О Нас"],
         align=[2, 2, 1, 1]
     ).reply_keyboard
     text = "Всем доброго дня!"
