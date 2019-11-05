@@ -330,7 +330,7 @@ async def add_money(message: types.Message):
 async def keyboards(message: types.Message):
     text = "Добро пожаловать в мир криптовалюты!"
     keyboard = ListOfButtons(
-           text=["Заработать 10%", "Заработать 25%", "Курс обмена", "Реклама", "Партнерская программа", "О Нас"],
+           text=["Инвестировать на 3 дня", "Инвестировать на 5 дней", "Курс обмена", "Реклама", "Партнерская программа", "О Нас"],
            align=[2, 2, 1, 1]
     ).reply_keyboard
     await message.answer(text=text, reply_markup=keyboard)
